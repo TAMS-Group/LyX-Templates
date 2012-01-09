@@ -1,0 +1,420 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% tamsBeamer.sty
+%
+% Author:	Andreas M"ader
+%		Universit"at Hamburg
+%		MIN-Fakult"at
+%		Department Informatik, AB TAMS
+%		Vogt-K"olln-Stra"se 30
+%		22527 Hamburg
+%
+%		Tel.:	040 42883-2502
+%		Fax.:	040 42883-2397
+%		e-mail:	maeder@informatik.uni-hamburg.de
+%-----------------------------------------------------------------------------
+%-- info	--------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tamsBeamer}[2007/11/04 TAMS-header for 'beamer' style -AJM-]
+
+%-----------------------------------------------------------------------------
+%-- extra packages	------------------------------------------------------
+\RequirePackage{graphicx}		% graphicx
+\RequirePackage{xcolor}			% color / xcolor
+\RequirePackage{ifthen}			%
+
+%-----------------------------------------------------------------------------
+%-- options		------------------------------------------------------
+%			tams	|	- TAMS		publication
+%			cinacs		- CINACS	publication
+%			engl		- english strings	[german]
+%			uniWZ	|	- uni		watermark
+%			tamsWZ	|	- tams+uni	watermark
+%			cinacsWZ	- cinacs+uni	watermark
+%			secToc	|	- toc repetition at each section
+%			secTocA	|	- -"-, all sections: show
+%					  replacement for toc in short docs
+%			subsecToc	- toc repetition at each subsection
+%			secNum  	- (sub)-section numbering
+%			fullstep	- always step through items
+%			noFoot		- footline	off
+%			noPage		- page numbers	off
+%			noAuth		- author	off
+%			conference	- footline with \foottitle{...}
+%			blockBG	|	- block, example etc. background
+%			blockRound	- -"-, rounded+shadow
+
+% uniWZ
+%-----------------------------------------------------------------------------
+\DeclareOption{uniWZ}{%
+  \logo{\includegraphics[height=60mm]{uniWZ}}%
+}
+
+% tamsWZ
+%-----------------------------------------------------------------------------
+\DeclareOption{tamsWZ}{%
+  \logo{\raisebox{25mm}{\includegraphics[height=35mm]{tamsWZ}}%
+	\hspace{25mm}\includegraphics[height=60mm]{uniWZ}}%
+}
+
+% cinacsWZ
+%-----------------------------------------------------------------------------
+\DeclareOption{cinacsWZ}{%
+  \logo{\raisebox{25mm}{\includegraphics[height=35mm]{cinacsWZ}}%
+	\hspace{25mm}\includegraphics[height=60mm]{uniWZ}}%
+}
+
+% engl
+%-----------------------------------------------------------------------------
+\newcommand{\tocName}{Gliederung}			% predefined: german
+\newcommand{\uniName}{Universit{\"a}t Hamburg}
+\newcommand{\fakName}{Fakult{\"a}t f{\"u}r Mathematik, Informatik
+	und Naturwissenschaften}
+\newcommand{\fakShortName}{MIN-Fakult{\"a}t}
+\newcommand{\infName}{Department Informatik}
+\newcommand{\tamsName}{Technische Aspekte Multimodaler Systeme}
+\newcommand{\cinacsName}{Kreuzmodale Interaktion in nat{\"u}rlichen und
+	k{\"u}nstlichen kognitiven Systemen}
+
+\DeclareOption{engl}{%
+  \renewcommand{\tocName}{Outline}
+  \renewcommand{\uniName}{University of Hamburg}
+  \renewcommand{\fakName}{Faculty of Mathematics, Informatics and
+	Natural Sciences}
+  \renewcommand{\fakShortName}{MIN Faculty}
+  \renewcommand{\infName}{Department of Informatics}
+  \renewcommand{\tamsName}{Technical Aspects of Multimodal Systems}
+  \renewcommand{\cinacsName}{Cross-modal Interactions in Natural and
+	Artificial Cognitive Systems}
+}
+
+% secToc
+%-----------------------------------------------------------------------------
+\DeclareOption{secToc}{%
+  \AtBeginSection[]{%
+    \begin{frame}[allowframebreaks]
+      \frametitle{\tocName}
+      \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/show/hide]
+%     \tableofcontents[currentsection]
+    \end{frame}
+  }
+}
+
+% secTocA
+%-----------------------------------------------------------------------------
+\DeclareOption{secTocA}{%
+  \AtBeginSection[]{%
+    \begin{frame}[allowframebreaks]
+      \frametitle{\tocName}
+      \tableofcontents[sectionstyle=show/show,subsectionstyle=show/show/hide]
+    \end{frame}
+  }
+}
+
+% subsecToc
+%-----------------------------------------------------------------------------
+\DeclareOption{subsecToc}{%
+  \AtBeginSubsection[]{%
+    \begin{frame}[allowframebreaks]
+      \frametitle{\tocName}
+      \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded]
+%     \tableofcontents[currentsection,currentsubsection]
+    \end{frame}
+  }
+}
+
+% secNum
+%-----------------------------------------------------------------------------
+\newif\if@doSecnum
+\@doSecnumfalse
+\DeclareOption{secNum}{\@doSecnumtrue}
+
+% fullstep
+%-----------------------------------------------------------------------------
+\DeclareOption{fullstep}{\beamerdefaultoverlayspecification{<+->}}
+
+% noFoot, noPage, noAuth
+%-----------------------------------------------------------------------------
+\newif\if@doFoot
+\@doFoottrue
+\newif\if@doPage
+\@doPagetrue
+\newif\if@doAuth
+\@doAuthtrue
+%
+\DeclareOption{noFoot}{\@doFootfalse}
+\DeclareOption{noPage}{\@doPagefalse}
+\DeclareOption{noAuth}{\@doAuthfalse}
+
+% conference	(enable \fotttitle{...} + new footer layout)
+%-----------------------------------------------------------------------------
+\newif\if@doConf
+\@doConffalse
+\DeclareOption{conference}{\@doConftrue}
+
+% blockBG, blockRound
+%-----------------------------------------------------------------------------
+\newif\if@doBlockBG
+\@doBlockBGfalse
+\newif\if@doBlockRound
+\@doBlockRoundfalse
+%
+\DeclareOption{blockBG}{\@doBlockBGtrue}
+\DeclareOption{blockRound}{\@doBlockRoundtrue\@doBlockBGtrue}
+
+% tams	- predefines institute
+%-----------------------------------------------------------------------------
+\newlength{\wbox}
+\DeclareOption{tams}{%
+  \settowidth{\wbox}{\tiny\fakName}%
+  \institute[\uniName{} -- \fakShortName]{%
+    \includegraphics[height=10mm]{logoTAMS}%
+    \hspace{2ex}\begin{minipage}[b][10mm]{\wbox}
+	\tiny%
+	\uniName{}\\%
+	\fakName\\%
+	\infName\vfill%
+	\textbf{\tamsName}
+    \end{minipage}
+  }
+}
+%\DeclareOption{tams}{%
+%  \settowidth{\wbox}{\footnotesize\tamsName}%
+%  \institute[\uniName{} -- \fakShortName]{%
+%    \includegraphics[height=10mm]{logoTAMS}%
+%    \hspace{2ex}\begin{minipage}[b][10mm]{\wbox}
+%	\uniName{} -- \fakShortName\vfill
+%	\infName\vfill
+%	\tamsName
+%    \end{minipage}
+%  }
+%}
+
+% cinacs	- predefines institute
+%-----------------------------------------------------------------------------
+\DeclareOption{cinacs}{%
+  \settowidth{\wbox}{\tiny\textbf{\cinacsName}}%
+  \institute[\uniName{} -- \fakShortName]{%
+    \includegraphics[height=10mm]{logoCINACS}%
+    \hspace{2ex}\begin{minipage}[b][10mm]{\wbox}
+	\tiny%
+	\uniName{}\\%
+	\fakName\\%
+	\infName\vfill%
+	\textbf{\cinacsName}
+    \end{minipage}
+  }
+}
+\ProcessOptions
+
+%-----------------------------------------------------------------------------
+%-- presentation mode	------------------------------------------------------
+\mode<presentation>
+{
+% colors and fonts
+%-----------------------------------------------------------------------------
+  \definecolor{uniGray}{RGB}{122,122,120}		% colors
+  \definecolor{uniRed}{RGB}{254,0,0}			%
+
+  \setbeamercolor{uniGrayBox}{fg=white,bg=uniGray}
+
+% \setbeamercolor*{normal text}{fg=black,bg=uniGray!10!white}
+% \setbeamercolor*{normal text}{fg=black,bg=gray!5!white}
+
+% \setbeamercolor*{palette primary}{fg=uniRed!80!black,bg=uniGray!10!white}
+% \setbeamercolor*{palette secondary}{fg=uniRed!60!black,bg=uniGray!5!white}
+% \setbeamercolor*{palette tertiary}{fg=uniRed!80!black}
+% \setbeamercolor*{palette quaternary}{fg=uniRed!60!black}
+
+  \setbeamercolor{frametitle}{fg=uniRed!80!black,bg=uniGray!10!white}
+% \setbeamercolor{frametitle right}{bg=uniRed!50!black}
+  \setbeamercolor{structure}{fg=uniRed!80!black}
+  \setbeamercolor{alerted text}{fg=uniRed!80!black}
+
+\if@doBlockBG		% block background	------------------------------
+% \setbeamercolor{example text}{fg=uniRed!80!black,bg=uniGray!10!white}
+  \setbeamercolor{block title example}{fg=uniRed!80!black,bg=uniGray!10!white}
+  \setbeamercolor{block body example}{bg=uniGray!10!white}
+  \setbeamercolor{block title alerted}{fg=white,bg=uniRed!80!black}
+  \setbeamercolor{block body alerted}{bg=uniGray!10!white}
+  \setbeamercolor{block title}{bg=uniGray!20!white}
+% \setbeamercolor{block title}{bg=uniGray!10!white}
+  \setbeamercolor{block body}{bg=uniGray!10!white}
+ \if@doBlockRound	% block rounded bg	------------------------------
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+ \fi
+\else			% no block background	------------------------------
+% \setbeamercolor{example text}{fg=uniRed!80!black}
+  \setbeamercolor{block title example}{fg=uniRed!80!black}
+\fi
+
+  \setbeamercolor{button}{fg=uniGray,bg=uniGray!10!white}
+
+% \setbeamercolor*{titlelike}{fg=uniRed!80!black,bg=uniGray!10!white}
+  \setbeamercolor*{titlelike}{fg=uniRed!80!black}
+
+% \setbeamercolor*{separation line}{fg=uniRed}
+% \setbeamercolor*{fine separation line}{}
+
+% \setbeamerfont{headFoot}{size=\Tiny}			% 4pt / 5pt
+  \setbeamerfont{headFoot}{size=\@setfontsize\Tiny{5}{6}}			% 4pt / 5pt
+
+% headline: UniHH web-design inspired
+%-----------------------------------------------------------------------------
+  \setbeamertemplate{headline}
+  {%
+    \usebeamerfont{headFoot}%
+    \settowidth{\wbox}{\infName}%
+    \vspace*{4.25ex}\hspace*{4.25ex}%
+	\includegraphics[height=8.5ex]{logoUHH}~~{\tiny\uniName}\hfill%
+	\begin{minipage}[b][8.5ex][t]{\wbox}
+	  \raggedleft\fakShortName\vspace{0.5ex}\\
+	  \infName
+	\end{minipage}~~%
+	\includegraphics[height=8.5ex]{logoINF}\makebox[4.25ex]{}%
+	\vspace{2ex}\linebreak
+    \begin{beamercolorbox}[ht=2.25ex, dp=1ex]{uniGrayBox}%
+	\hspace*{4.25ex}%
+\if@doSecnum		% section numbers	------------------------------
+	\ifthenelse{\equal{\thesection}{0}}{}{\thesection%
+	  \ifthenelse{\equal{\thesubsection}{0}}{}{.\thesubsection%
+	    \ifthenelse{\equal{\thesubsubsection}{0}}{}{.\thesubsubsection}}}
+\fi
+	\insertsection
+	\ifthenelse{\equal{\thesubsection}{0}}{}{ - \insertsubsection%
+	  \ifthenelse{\equal{\thesubsubsection}{0}}{}{ - \insertsubsubsection}}
+	\hfill
+	\insertshorttitle\makebox[4.25ex]{}%
+    \end{beamercolorbox}
+  }
+
+\def\email#1{\gdef\@email{#1}}
+\def\@email{}
+
+\def\foottitle#1{\gdef\@foottitle{ - #1}}
+\def\@foottitle{}
+
+% footline: author, navigation symbols and framenumber
+%-----------------------------------------------------------------------------
+\if@doFoot		% footline		------------------------------
+  \setbeamertemplate{footline}
+  {%
+    \usebeamerfont{headFoot}%
+    \begin{beamercolorbox}[ht=2.25ex, dp=1ex]{uniGrayBox}%
+ \if@doConf		% conference layout	------------------------------
+	\hspace*{4.25ex}\insertshortauthor%
+	\@foottitle\hfill%
+	\raisebox{-1ex}{%
+	  \hbox{\insertslidenavigationsymbol}
+	  \hbox{\insertframenavigationsymbol}
+	  \hbox{\insertsubsectionnavigationsymbol}
+	  \hbox{\insertsectionnavigationsymbol}
+%	  \hbox{\insertdocnavigationsymbol}
+	  \hbox{\insertbackfindforwardnavigationsymbol}%
+	}%
+	\makebox[\beamer@rightmargin][r]{\insertframenumber\makebox[4.25ex]{}}%
+ \else			% standard layout	------------------------------
+  \if@doAuth		% author on		------------------------------
+	\makebox[0.3\linewidth][l]{\hspace*{4.25ex}\insertshortauthor}\hfill%
+  \else			% no author		------------------------------
+	\makebox[0.3\linewidth]{}\hfill%
+  \fi
+	\raisebox{-1ex}{%
+	  \hbox{\insertslidenavigationsymbol}
+	  \hbox{\insertframenavigationsymbol}
+	  \hbox{\insertsubsectionnavigationsymbol}
+	  \hbox{\insertsectionnavigationsymbol}
+%	  \hbox{\insertdocnavigationsymbol}
+	  \hbox{\insertbackfindforwardnavigationsymbol}%
+	}\hfill%
+  \if@doPage		% pagenumber on		------------------------------
+	\makebox[0.3\linewidth][r]{\insertframenumber\makebox[4.25ex]{}}%
+  \else			% no pagenumber		------------------------------
+	\makebox[0.3\linewidth]{}%
+  \fi
+ \fi
+    \end{beamercolorbox}
+  }
+\fi
+
+% bibliography
+%-----------------------------------------------------------------------------
+  \setbeamertemplate{bibliography item}[text]
+% \setbeamertemplate{bibliography item}[triangle]
+% \setbeamertemplate{bibliography entry author}{}
+  \setbeamertemplate{bibliography entry title}{\newline}
+  \setbeamertemplate{bibliography entry location}{\newline}
+  \setbeamertemplate{bibliography entry note}{\newline}
+  \setbeamercolor{bibliography entry location}{fg=black}
+  \setbeamercolor{bibliography entry note}{fg=black}
+
+% misc.
+%-----------------------------------------------------------------------------
+  \setbeamertemplate{navigation symbols}{}
+
+  \setbeamertemplate{frametitle continuation}[from second]
+% \setbeamertemplate{frametitle continuation}{\insertcontinuationcount}
+
+  \setbeamercovered{transparent}
+
+\if@doSecnum		% sectionnumber		------------------------------
+  \setbeamertemplate{sections/subsections in toc}[sections numbered]
+% \setbeamertemplate{sections/subsections in toc}[square]
+\fi
+
+% \setbeamersize{description width=3em}
+
+  \setbeamertemplate{caption}{\tiny\insertcaption}
+}
+
+%-----------------------------------------------------------------------------
+%-- contact frame	------------------------------------------------------
+\newcommand{\contactframe}[1][]{%
+  \frame{%
+	\ifthenelse{\equal{#1}{}}{}{\frametitle{#1}}%
+	\begin{center}
+	  \insertauthor\\
+	  \texttt{\small\@email}
+
+	  \vspace{2\baselineskip}%
+	  \insertinstitute
+	\end{center}
+  }
+}
+
+%-----------------------------------------------------------------------------
+%-- misc. definitions	------------------------------------------------------
+\newcommand{\capText}[1]{{\tiny #1}}
+\newcommand{\surl}[1]{{\small\url{#1}}}
+\newcommand{\dqbox}[1]{\settowidth{\wbox}{#1}\makebox[\wbox]{--\dq{}--}}
+\newcommand{\txtbox}[2]{\settowidth{\wbox}{#1}\makebox[\wbox][l]{#2}}
+
+\newcommand{\grad}{\ensuremath{^\circ}}
+
+%-- vertical space to next line			------------------------------
+\newcommand{\lvskip}{\vspace*{\baselineskip}}
+\newcommand{\svskip}{\vspace*{\smallskipamount}}
+\newcommand{\mvskip}{\vspace*{\medskipamount}}
+\newcommand{\bvskip}{\vspace*{\bigskipamount}}
+
+%-- vertical space to next line + linebreak	------------------------------
+\newcommand{\snewlin}{\smallskip\\}
+\newcommand{\mnewlin}{\medskip\\}
+\newcommand{\bnewlin}{\bigskip\\}
+
+%-- graphic inclusion, overriding box sizes	------------------------------
+%
+% reducedgraphics[<include-Option>]{<graphic-File>}{<boxWidth>}{<boxHeight>}
+\newcommand{\reducedgraphics}[4][]{%
+  \parbox[b][#4][t]{#3}{\includegraphics[#1]{#2}}}
+%
+% picturegraphics[<include-Option>]{<graphic-File>}{<x>,<y>}
+\newcommand{\picturegraphics}[3][]{%
+% \setlength{\unitlength}{1mm}%
+  \begin{picture}(0,0)(0,0)%	% offset:	+ move left	+ move down
+    \put(#3){%			% direction:	+ move right	+ move top
+	\makebox(0,0)[lb]{\includegraphics[#1]{#2}}}%
+  \end{picture}%
+}
+%
+\setlength{\unitlength}{1mm}	% already set: unitlength = 1mm

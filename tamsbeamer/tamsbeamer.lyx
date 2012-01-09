@@ -1,0 +1,589 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass beamer
+\begin_preamble
+\usepackage[ uniWZ, tams, blockBG, blockRound, engl, conference ]{tamsBeamer}
+%-- options	------------------------------------------------------
+%	tams	|	- TAMS		publication
+%	engl		- english strings	[german]
+%	uniWZ	|	- uni		watermark
+%	tamsWZ	|	- tams+uni	watermark
+%	cinacsWZ	- cinacs+uni	watermark
+%	secToc	|	- toc repetition at each section
+%	secTocA		- -"-, all sections: show
+%			  replacement for toc in short docs
+%	subsecToc	- toc repetition at each subsection
+%	secNum  	- (sub)-section numbering
+%	fullstep	- always step through items
+%	noFoot		- footline	off
+%	noPage		- page numbers	off
+%	noAuth		- author	off
+%	conference	- footline with \foottitle{...}
+%	blockBG	|	- block, example etc. background
+%	blockRound	- -"-, rounded+shadow
+\end_preamble
+\options t
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman lmodern
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 1
+\bibtex_command default
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Introduction to the Git Version Control System"
+\pdf_author "Sebastian Rockel"
+\pdf_subject "Oberseminar TAMS, Department of Informatics, University Hamburg"
+\pdf_keywords "Git, Version Control System"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 2
+\use_esint 0
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation skip
+\defskip medskip
+\quotes_language danish
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "basicstyle={\sffamily\small},breakatwhitespace=true,breaklines=true,captionpos=b,commentstyle={\color{red}\emph},escapeinside={\%*}{*)},frameshape={RYR}{y}{y}{RYR},identifierstyle={\color{black}\bfseries},keywordstyle={\color{blue}\bfseries},numbers=none,numbersep=5pt,numberstyle={\color{black}\tiny},showspaces=false,showstringspaces=false,showtabs=false,stepnumber=1,stringstyle={\ttfamily\color{red}\bfseries\emph},tabsize=2"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Title..
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "subs/title/tamstitle.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Outline..
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout BeginFrame
+Outline
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Content..
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Project Overview
+\end_layout
+
+\begin_layout BeginFrame
+Person Month
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Deliverables
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Milestones
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Section
+Planned Tasks for WP5 (1st Year)
+\end_layout
+
+\begin_layout BeginFrame
+T5.1 (UHAM, ORU, UOS, UA) M1-M9
+\end_layout
+
+\begin_layout FrameSubtitle
+Robot control SW architecture for evaluation
+\end_layout
+
+\begin_layout Itemize
+define Abstract Robot Control Architecture (ARCA)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+provide interfaces
+\end_layout
+
+\begin_layout Itemize
+specify control and information flow between components (UML)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+proved remote interface to the robot
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+T5.2 (UHAM, ORU, UOS, UA) M1-M33
+\end_layout
+
+\begin_layout FrameSubtitle
+Simulation infrastructure
+\end_layout
+
+\begin_layout Itemize
+provide simulation infrastructure
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+stage 1:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+3D robot model with models of real world sensors
+\end_layout
+
+\begin_layout Itemize
+one room, table, cups, cans
+\end_layout
+
+\begin_layout Itemize
+physical model and properties of objects
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+T5.3 (UHAM, ORU, UOS, UA) M1-M33
+\end_layout
+
+\begin_layout FrameSubtitle
+Sensor data acquisition
+\end_layout
+
+\begin_layout Itemize
+physical robot
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+arrange initial experiments and scenarios for WP2 (to gain multi-level symbolic
+ representations from raw sensor data)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+store acquired data centrally
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+T5.4 (UHAM, ORU, UOS, UA, UL, HITeC) M1-M36
+\end_layout
+
+\begin_layout FrameSubtitle
+Demonstrators
+\end_layout
+
+\begin_layout Itemize
+Stage 1:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+simulated demonstrator
+\end_layout
+
+\begin_layout Itemize
+*partly physical demonstrator (if possible)
+\end_layout
+
+\begin_layout Itemize
+integrate achievements from WP1-WP4 into artificial cognitive system (ACS)
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+T5.5 (UHAM, ORU, UOS, UA, UL) M1-M36
+\end_layout
+
+\begin_layout FrameSubtitle
+Benchmarking and evaluation
+\end_layout
+
+\begin_layout Itemize
+Stage 1:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+use experiences for reproducing robot activities in essentially identical
+ environments
+\end_layout
+
+\begin_layout Itemize
+Demo 1.1: Serve-a-coffee
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+see details in B1.1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Demo 1.2: Clear-coffee-mugs-from-table
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Section
+Summary
+\end_layout
+
+\begin_layout BeginFrame
+Planned
+\end_layout
+
+\begin_layout Itemize
+Simulated robot platform
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+3D model of PR2
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Extension: Kinect, Infrared camera (more?)
+\end_layout
+
+\begin_layout Itemize
+Integration of further sensor into simulation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+3D environment restaurant/kitchen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Tables, chairs, objects (static, dynamic)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+3D human models (static, dynamic, random)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+2D/3D Navigation (platform, arms)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Collision avoidance
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Remote interface to the robot
+\end_layout
+
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout BeginFrame
+Planned (cont.)
+\end_layout
+
+\begin_layout Itemize
+Year one demonstrator2D/3D Navigation (platform, arms)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+collision avoidance
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Remote interface to the robot
+\end_layout
+
+\begin_layout Itemize
+Year one demonstrator
+\end_layout
+
+\begin_layout Itemize
+Abstraction layer for all integrated components
+\end_layout
+
+\begin_layout Itemize
+Integration onto the real robot
+\end_layout
+
+\begin_layout Itemize
+Abstraction layer for all integrated components
+\end_layout
+
+\begin_layout Itemize
+Integration onto the real robot
+\end_layout
+
+\begin_layout Itemize
+Define Abstract Robot Control Architecture (ARCA) with other project participant
+s
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Provide interfaces
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Section
+Issues
+\end_layout
+
+\begin_layout BeginFrame
+Issues
+\end_layout
+
+\begin_layout Itemize
+What is needed by other WP?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Interfaces?
+\end_layout
+
+\begin_layout Itemize
+Interfaces?
+\end_layout
+
+\begin_layout Itemize
+Interfaces?
+\end_layout
+
+\begin_layout Itemize
+...
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Abstraction level of sensory data?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+raw data, symbolic data..?
+\end_layout
+
+\end_deeper
+\begin_layout EndFrame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Appendix..
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\start_of_appendix
+\begin_inset CommandInset include
+LatexCommand include
+filename "subs/appendix_presentation.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -5,7 +5,7 @@ Typically a LyX template consists of following files:
 *.layout  - LyX format/layout file
 *.cls     - TeX class file
 *.lyx     - LyX template file
-(*.tex   - TeX sample file)
+(*.tex    - TeX sample file)
 
 Mac OS X
 --------
@@ -13,10 +13,18 @@ cp *.layout ~/.lyx/layouts/
 cp *.cls ~/Library/texmf/tex/latex/
 cp *.lyx ~/
 
-Last but not least
-------------------
+To always after installation:
+-----------------------------
 'sudo texhash' - to make TeX aware of the new class
 'LyX -> Reconfigure' - to make LyX aware of the new layout
 
 TODO
 Write Howtos for other OSs
+
+tamsbeamer
+----------
+tams/   - TeX styles and logos
+subs/   - LyX include files (chaper-wise)
+tamsbeamer.lyx    - Main LyX file
+
+Installation: 'cp -r tams/ ~/Library/texmf/tex/latex/'
