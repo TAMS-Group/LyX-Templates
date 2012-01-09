@@ -1,0 +1,22 @@
+Installation
+=============
+
+Typically a LyX template consists of following files:
+*.layout  - LyX format/layout file
+*.cls     - TeX class file
+*.lyx     - LyX template file
+(*.tex   - TeX sample file)
+
+Mac OS X
+--------
+cp *.layout ~/.lyx/layouts/
+cp *.cls ~/Library/texmf/tex/latex/
+cp *.lyx ~/
+
+Last but not least
+------------------
+'sudo texhash' - to make TeX aware of the new class
+'LyX -> Reconfigure' - to make LyX aware of the new layout
+
+TODO
+Write Howtos for other OSs
