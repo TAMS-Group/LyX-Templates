@@ -833,7 +833,14 @@ Equations
 
 \begin_layout Standard
 Number equations consecutively with equation numbers in parentheses flush
- with the right margin, as in (1).
+ with the right margin, as in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:one"
+
+\end_inset
+
+.
  To make your equations more compact you may use the solidus (/), the exp.
  function, or appropriate exponents.
  Italicize Roman symbols for quantities and variables, but not Greek symbols.
@@ -842,9 +849,9 @@ Number equations consecutively with equation numbers in parentheses flush
  Punctuate equations with commas or periods when they are part of a sentence:
  
 \begin_inset Formula 
-\[
-\Gamma_{2}a^{2}+\Gamma_{3}a^{3}+\Gamma_{4}a^{4}+...=\lambda\Lambda(x),
-\]
+\begin{equation}
+\Gamma_{2}a^{2}+\Gamma_{3}a^{3}+\Gamma_{4}a^{4}+...=\lambda\Lambda(x),\label{eq:one}
+\end{equation}
 
 \end_inset
 
